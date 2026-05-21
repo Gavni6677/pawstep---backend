@@ -1,0 +1,14 @@
+### קבלת כל נותני השירות
+GET http://localhost:3000/sitter
+
+###
+
+### יצירת נותן שירות חדש
+POST http://localhost:3000/sitter
+Content-Type: application/json
+
+{
+    "name": "Maya Levi",
+    "cost": 60,
+    "bio": "Passionate animal lover with over 4 years of experience."
+}
