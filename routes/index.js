@@ -14,6 +14,12 @@ const petRouter = require('./pet_routes');
 // הגדרת הקידומת לחיות
 router.use('/pets', petRouter);
 
+// ייבוא הראוטר של הדו"חות
+const reportRouter = require('./report_routes');
+
+// הגדרת הקידומת לדו"חות טיול
+router.use('/reports', reportRouter);
+
 // 3. ניתוב ברירת מחדל רק כדי לבדוק שהשרת מגיב (כמו במצגת)
 router.get('/', (req, res) => {
     res.send('Welcome to PawStep API');
