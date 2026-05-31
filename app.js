@@ -1,5 +1,9 @@
 const express = require('express');
 const app = express();
+// טעינת ההגדרות מקובץ ה-.env
+const dotenv = require("dotenv").config(); 
+const port = process.env.PORT; // שאיבת הפורט מהקובץ
+
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 require('dotenv').config();
@@ -16,10 +20,10 @@ db.on('error', error => { console.error(error) });
 db.once('open', () => console.log('Connected to MongoDB successfully')); 
 
 // ייבוא וקישור הראוטר של נותני השירות
-const sitterRouter = require('./routes/sitter_routes');
-app.use('/sitter', sitterRouter);
+const indexRouter = require('./routes/index');
+app.use('/', indexRouter);
 
 // הפעלת השרת על פורט 3000
-app.listen(3000, () => {
-    console.log('Server is running on port 3000');
+app.listen(port, () => {
+    console.log('Server is running on port ' + port);
 });
