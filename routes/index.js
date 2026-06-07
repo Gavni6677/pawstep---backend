@@ -27,3 +27,9 @@ router.get('/', (req, res) => {
 
 // 4. מייצאים את המרכזייה החוצה כדי שהקובץ הראשי יוכל להשתמש בה
 module.exports = router;
+
+// ייבוא ראוטר ההרשאות
+const authRouter = require('./auth_routes');
+
+// הוספת הקידומת auth
+router.use('/auth', authRouter);

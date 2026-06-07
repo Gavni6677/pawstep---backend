@@ -12,3 +12,43 @@ Content-Type: application/json
     "cost": 60,
     "bio": "Passionate animal lover with over 4 years of experience."
 }
+
+### התחברות למערכת (Login)
+POST http://localhost:3000/auth/login
+Content-Type: application/json
+
+{
+  "email": "gal@example.com",
+  "password": "mySecretPassword123"
+}
+
+### מבחן 1: ניסיון לפרוץ למערכת (שליחת דו"ח ללא טוקן)
+# השרת אמור לחסום אותנו ולהחזיר שגיאה 401
+POST http://localhost:3000/reports
+Content-Type: application/json
+
+{
+  "petName": "Rex",
+  "durationMinutes": 30,
+  "distanceKm": 1.5,
+  "didPee": true,
+  "didPoo": true,
+  "didEat": false,
+  "summary": "Rex was a good boy!"
+}
+
+### מבחן 2: כניסה חוקית (שליחת דו"ח עם טוקן)
+# חשוב: את חייבת להחליף את המילה YOUR_ACCESS_TOKEN_HERE בטוקן האמיתי שקיבלת!
+POST http://localhost:3000/reports
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImdhbEBleGFtcGxlLmNvbSIsImlhdCI6MTc4MDg0MDEwNiwiZXhwIjoxNzgwODQxMDA2fQ.DuK9ITownmtDwDSDrIPIOPi0-zTjHp7nr2Fi8L88ygI
+Content-Type: application/json
+
+{
+  "petName": "Luna",
+  "durationMinutes": 45,
+  "distanceKm": 2.5,
+  "didPee": true,
+  "didPoo": false,
+  "didEat": true,
+  "summary": "Luna enjoyed the park."
+}
