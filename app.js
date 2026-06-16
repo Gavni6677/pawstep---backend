@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+const cors = require('cors');
 // טעינת ההגדרות מקובץ ה-.env
 const dotenv = require("dotenv").config(); 
 const port = process.env.PORT; // שאיבת הפורט מהקובץ
@@ -11,6 +12,7 @@ require('dotenv').config();
 // הגדרת פארסר לבקשות נתונים (עמוד 21 במדריך)
 app.use(bodyParser.urlencoded({ extended: true, limit: '1mb' })); 
 app.use(bodyParser.json()); 
+app.use(cors());
 
 // חיבור למסד הנתונים מונגו (עמוד 4 במדריך)
 mongoose.connect(process.env.DATABASE_URL);
