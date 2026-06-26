@@ -8,4 +8,7 @@ router.post('/register', authController.register);
 // התחברות
 router.post('/login', authController.login);
 
+// התחברות באמצעות גוגל
+router.post('/google', authController.googleLogin);
+
 module.exports = router;

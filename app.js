@@ -9,12 +9,16 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 require('dotenv').config();
 
-// הגדרת פארסר לבקשות נתונים (עמוד 21 במדריך)
+// הגדרת פארסר לבקשות נתונים
 app.use(bodyParser.urlencoded({ extended: true, limit: '1mb' })); 
 app.use(bodyParser.json()); 
 app.use(cors());
 
-// חיבור למסד הנתונים מונגו (עמוד 4 במדריך)
+// --- התוספת שלנו להגשת קבצים סטטיים ---
+// הגדרת "virtual prefix" כך שכל מה שבתוך תיקיית public יהיה נגיש בכתובת דרך /public [cite: 12, 14]
+app.use('/public', express.static('public'));
+
+// חיבור למסד הנתונים מונגו
 mongoose.connect(process.env.DATABASE_URL);
 const db = mongoose.connection; 
 
@@ -24,6 +28,10 @@ db.once('open', () => console.log('Connected to MongoDB successfully'));
 // ייבוא וקישור הראוטר של נותני השירות
 const indexRouter = require('./routes/index');
 app.use('/', indexRouter);
+
+// --- התוספת שלנו לניתוב העלאת התמונות ---
+const fileRouter = require('./routes/file_routes');
+app.use('/file', fileRouter);
 
 // הפעלת השרת על פורט 3000
 app.listen(port, () => {
