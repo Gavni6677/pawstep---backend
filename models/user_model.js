@@ -25,10 +25,17 @@ const userSchema = new mongoose.Schema(
       type: String,
       enum: ['owner', 'sitter', 'admin'],
       default: 'owner'
+    },
+    photo: {
+      type: String,
+      required: false,
+      default: 'http://localhost:3000/public/default-avatar.png'
     }
   },
   { timestamps: true }
 );
+
+
 
 // הצפנת סיסמה לפני שמירת משתמש חדש
 userSchema.pre('save', async function () {
@@ -43,3 +50,4 @@ userSchema.methods.comparePassword = async function (candidatePassword) {
 };
 
 module.exports = mongoose.model('User', userSchema);
+

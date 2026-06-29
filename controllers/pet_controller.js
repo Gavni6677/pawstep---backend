@@ -10,13 +10,16 @@ const getPets = async (req, res) => {
   }
 };
 
-// פונקציה להוספת חיית מחמד חדשה
+//פונקציה להוספת חחית מחמד חדשה
 const addPet = async (req, res) => {
   const pet = new Pet({
     name: req.body.name,
     type: req.body.type,
     age: req.body.age,
-    medicalNotes: req.body.medicalNotes
+    medicalNotes: req.body.medicalNotes,
+    photo: req.body.photo,
+    // השרת מושך את המזהה ישירות מהטוקן המפוענח!
+    ownerId: req.user._id 
   });
 
   try {

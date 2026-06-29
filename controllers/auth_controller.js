@@ -30,9 +30,11 @@ const createRefreshToken = (user) => {
 };
 
 // הרשמה
+// הרשמה
 const register = async (req, res) => {
   try {
-    const { name, email, password, role } = req.body;
+    // הוספנו את ה-photo לשליפה מהבקשה (שורה 4)
+    const { name, email, password, role, photo } = req.body;
 
     if (!name || !email || !password) {
       return res.status(400).json({
@@ -54,11 +56,13 @@ const register = async (req, res) => {
       });
     }
 
+    // הוספנו את ה-photo ליצירת המשתמש במסד הנתונים
     const user = await User.create({
       name,
       email,
       password,
-      role
+      role,
+      photo
     });
 
     res.status(201).json({
@@ -67,7 +71,8 @@ const register = async (req, res) => {
         id: user._id,
         name: user.name,
         email: user.email,
-        role: user.role
+        role: user.role,
+        photo: user.photo
       }
     });
   } catch (err) {

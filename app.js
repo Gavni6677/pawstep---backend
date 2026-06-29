@@ -37,3 +37,7 @@ app.use('/file', fileRouter);
 app.listen(port, () => {
     console.log('Server is running on port ' + port);
 });
+
+// ייבוא וקישור הראוטר של חיות המחמד
+const petRouter = require('./routes/pet_routes'); //
+app.use('/pets', petRouter);
